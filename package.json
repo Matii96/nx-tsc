@@ -1,0 +1,57 @@
+{
+  "name": "@matii96/nx-tsc",
+  "version": "1.0.0",
+  "description": "tsc executor for nx",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Matii96/nx-tsc.git"
+  },
+  "keywords": [
+    "nx",
+    "tsc"
+  ],
+  "author": "Matii96",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Matii96/nx-tsc/issues"
+  },
+  "homepage": "https://github.com/Matii96/nx-tsc",
+  "main": "dist/build-executor.js",
+  "types": "dist/build-executor.d.ts",
+  "scripts": {
+    "build": "tsc --build --force tsconfig.build.json",
+    "watch": "tsc --watch tsconfig.build.json",
+    "lint": "eslint ./lib/**/*.ts",
+    "lint:fix": "eslint ./lib/**/*.ts --fix",
+    "test": "jest",
+    "test:e2e": "docker-compose -f ./e2e/docker-compose.e2e.yml up --abort-on-container-exit --exit-code-from healthcheck --build --remove-orphans"
+  },
+  "files": [
+    "dist",
+    "schema.json",
+    "executor.json",
+    "package.json",
+    "package-lock.json"
+  ],
+  "executors": "./executor.json",
+  "dependencies": {
+    "chokidar": "^3.5.3",
+    "glob": "^7.2.0",
+    "rxjs": "^7.5.5",
+    "rxjs-for-await": "^1.0.0"
+  },
+  "devDependencies": {
+    "@nrwl/devkit": "^13.9.6",
+    "@types/glob": "^7.2.0",
+    "@types/jest": "^27.4.1",
+    "@typescript-eslint/eslint-plugin": "^5.17.0",
+    "@typescript-eslint/parser": "^5.17.0",
+    "eslint": "^8.11.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.0.0",
+    "jest": "^27.5.1",
+    "prettier": "^2.5.1",
+    "ts-jest": "^27.1.4",
+    "typescript": "^4.6.2"
+  }
+}

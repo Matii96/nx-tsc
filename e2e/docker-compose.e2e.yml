@@ -1,0 +1,32 @@
+version: '3.8'
+
+x-build: &build
+  context: ..
+  dockerfile: ./e2e/Dockerfile.e2e
+
+x-healthcheck: &healthcheck
+  test: ['CMD', 'curl', '-f', 'http://localhost:3333/api']
+  interval: 2s
+  timeout: 2s
+  retries: 30
+
+services:
+  command-build:
+    build: *build
+    command: >
+      sh -c "npx nx build server && node ./dist/out-tsc/apps/server/src/main"
+    healthcheck: *healthcheck
+
+  command-serve:
+    build: *build
+    command: npx nx serve server
+    healthcheck: *healthcheck
+
+  healthcheck:
+    image: node:16-alpine
+    command: echo e2e tests completed
+    depends_on:
+      command-build:
+        condition: service_healthy
+      command-serve:
+        condition: service_healthy
