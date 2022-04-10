@@ -3,10 +3,6 @@
   "type": "object",
   "cli": "nx",
   "properties": {
-    "outputPath": {
-      "type": "string",
-      "description": "The output path of the generated files."
-    },
     "main": {
       "type": "string",
       "description": "The name of the main entry-point file."
