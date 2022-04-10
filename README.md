@@ -26,7 +26,7 @@ $ npm i --save-dev @matii96/nx-tsc
 
 App's project.json:
 
-```json
+```js
 {
   "root": "apps/my-app",
   "sourceRoot": "apps/my-app/src",
@@ -61,7 +61,7 @@ App's project.json:
 
 App's tsconfig.app.json:
 
-```json
+```js
 {
   "compilerOptions": {
     "outDir": "../../dist/out-tsc/my-app",
