@@ -82,12 +82,12 @@ $ nx build my-app
 ## Options
 
 | Property       | What it does                                           | Required |
-| -------------- | ------------------------------------------------------ | -------- | --- |
+| -------------- | ------------------------------------------------------ | -------- |
 | `main`         | The name of the main entry-point file                  | &check;  |
 | `tsConfig`     | The name of the Typescript configuration file          | &check;  |
 | `assets`       | List of static application assets                      | &check;  |
 | `watch`        | Run build when files change                            |          |
-| `debounceTime` | Debounce timeout after last file change for watch mode |          |     |
+| `debounceTime` | Debounce timeout after last file change for watch mode |          |
 
 ## License
 
