@@ -69,7 +69,7 @@ jobs:
           cache-name: cache-dist
         with:
           path: ./dist
-          key: ${{ hashFiles('./dist/**') }}
+          key: ${{ hashFiles('./lib/**') }}
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
@@ -86,7 +86,7 @@ jobs:
           cache-name: cache-dist
         with:
           path: ./dist
-          key: ${{ hashFiles('./dist/**') }}
+          key: ${{ hashFiles('./lib/**') }}
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
@@ -103,7 +103,7 @@ jobs:
           cache-name: cache-dist
         with:
           path: ./dist
-          key: ${{ hashFiles('./dist/**') }}
+          key: ${{ hashFiles('./lib/**') }}
       - name: Use Node.js
         uses: actions/setup-node@v2
         with:
