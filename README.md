@@ -52,7 +52,11 @@ App's project.json:
           ]
         }
       }
-    }
+    },
+    "..."
+  },
+  "tags": []
+}
 ```
 
 App's tsconfig.app.json:
@@ -62,6 +66,10 @@ App's tsconfig.app.json:
   "extends": "./tsconfig.json",
   "compilerOptions": {
     "outDir": "../../dist/out-tsc/my-app",
+    "..."
+  },
+  "..."
+}
 ```
 
 Nothing changes in serve and build commands:
