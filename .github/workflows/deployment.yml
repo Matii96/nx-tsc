@@ -80,6 +80,7 @@ jobs:
   e2e-tests:
     runs-on: ubuntu-18.04
     steps:
+      - uses: actions/checkout@v2
       - name: Load build output
         uses: actions/cache@v2
         env:
@@ -97,6 +98,7 @@ jobs:
   publish-dry-run:
     runs-on: ubuntu-18.04
     steps:
+      - uses: actions/checkout@v2
       - name: Load build output
         uses: actions/cache@v2
         env:
