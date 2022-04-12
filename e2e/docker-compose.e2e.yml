@@ -14,7 +14,7 @@ services:
   command-build:
     build: *build
     command: >
-      sh -c "npx nx build server && node ./dist/out-tsc/apps/server/src/mainn"
+      sh -c "npx nx build server && node ./dist/out-tsc/apps/server/src/main"
     healthcheck: *healthcheck
 
   command-serve:
