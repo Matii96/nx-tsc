@@ -1,6 +1,11 @@
 name: Tests
 
-on: workflow_call
+on:
+  workflow_call:
+    inputs:
+      username:
+        required: false
+        type: string
 
 jobs:
   install-dependencies:
