@@ -2,7 +2,7 @@
 
 <div align="center">
 
-[![MIT Licensed](https://img.shields.io/badge/License-MIT-brightgreen)](/LICENSE)
+[![MIT Licensed](https://img.shields.io/badge/License-MIT-brightgreen)](/LICENSE) ![ci](https://github.com/Matii96/nx-tsc/actions/workflows/release.yml/badge.svg)
 
 [Typescript](https://www.typescriptlang.org) executor for [Nx workspace](https://nx.dev).
 
