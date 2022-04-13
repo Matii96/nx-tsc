@@ -16,7 +16,5 @@ jobs:
       - name: Install node_modules
         run: if [ ! -d ./node_modules ]; then npm ci; fi
       - name: Test
-        run: ls -al
-      - name: Test2
-        run: ls -al .github
+        run: cat ./.github/workflows/tests.yml
       - uses: ./.github/workflows/tests.yml
