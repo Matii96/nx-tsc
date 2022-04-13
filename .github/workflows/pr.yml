@@ -17,4 +17,4 @@ jobs:
         run: if [ ! -d ./node_modules ]; then npm ci; fi
       - name: Test
         run: cat ./.github/workflows/tests.yml
-      - uses: ./.github/workflows/tests.yml
+      - uses: ./.github/workflows/tests
