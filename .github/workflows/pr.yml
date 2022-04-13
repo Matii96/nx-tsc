@@ -7,17 +7,14 @@ concurrency:
 on:
   pull_request:
     types: [opened, reopened, synchronize]
-    branches:
-      - master
 
 jobs:
   tests:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-        with:
-          path: ${{ github.repository }}
-          fetch-depth: 0
+      - name: Install node_modules
+        run: if [ ! -d ./node_modules ]; then npm ci; fi
       - name: Test
         run: ls -al
       - name: Test2
