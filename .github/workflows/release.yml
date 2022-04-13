@@ -24,7 +24,7 @@ jobs:
         env:
           cache-name: cache-dist
         with:
-          path: ./dist
+          path: ./dist/
           key: lib-${{ hashFiles('./lib/**') }}
       - name: Use Node.js
         uses: actions/setup-node@v2
