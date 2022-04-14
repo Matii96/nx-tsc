@@ -6,11 +6,15 @@ export const tsconfigLoader = (filepath: string) => {
   const tsconfig = JSON.parse(readFileSync(filepath).toString());
   let outDir: string;
   let paths: Record<string, string[]> = {};
+  let excludeFiles: string[] = [];
+  let includeFiles: string[] = [];
 
   if (tsconfig.extends) {
     const parentConfig = tsconfigLoader(resolve(tsconfigDirname, tsconfig.extends));
     outDir = parentConfig.outDir;
     paths = { ...paths, ...parentConfig.paths };
+    excludeFiles = [...excludeFiles, ...parentConfig.excludeFiles];
+    includeFiles = [...includeFiles, ...parentConfig.includeFiles];
   }
 
   if (tsconfig?.compilerOptions) {
@@ -20,5 +24,8 @@ export const tsconfigLoader = (filepath: string) => {
     paths = { ...paths, ...(tsconfig.compilerOptions.paths || {}) };
   }
 
-  return { outDir, paths };
+  excludeFiles = [...excludeFiles, ...(tsconfig.exclude || []).map((path: string) => join(tsconfigDirname, path))];
+  includeFiles = [...includeFiles, ...(tsconfig.include || []).map((path: string) => join(tsconfigDirname, path))];
+
+  return { outDir, paths, excludeFiles, includeFiles };
 };

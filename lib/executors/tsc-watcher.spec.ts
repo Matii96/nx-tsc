@@ -1,5 +1,6 @@
 import { Subscriber } from 'rxjs';
 import * as chokidar from 'chokidar';
+import * as glob from 'glob';
 import { BuildToolsMock } from '../build-tools/build-tools.mocks';
 import { tscRunnerOptionsMock } from '../build-executor.mocks';
 import { TscWatcher } from './tsc-watcher';
@@ -26,6 +27,32 @@ describe('TscWatcher', () => {
       await tscExecutor.handle();
       // @ts-ignore
       expect(tscExecutor.build).toHaveBeenCalledTimes(1);
+    });
+  });
+
+  describe('handleChange', () => {
+    const fileToExclude = '/path/to/file';
+
+    beforeEach(() => {
+      jest.spyOn(glob, 'sync').mockReturnValue([fileToExclude]);
+      // @ts-ignore
+      tscExecutor.options.excludeFiles = [fileToExclude];
+      // @ts-ignore
+      tscExecutor.changeObserver = { next: jest.fn() };
+    });
+
+    it('should handle file change', () => {
+      // @ts-ignore
+      tscExecutor.handleChange('change', 'included/file');
+      // @ts-ignore
+      expect(tscExecutor.changeObserver.next).toHaveBeenCalledTimes(1);
+    });
+
+    it('should not handle file change - file excluded', () => {
+      // @ts-ignore
+      tscExecutor.handleChange('change', fileToExclude);
+      // @ts-ignore
+      expect(tscExecutor.changeObserver.next).not.toHaveBeenCalled();
     });
   });
 
