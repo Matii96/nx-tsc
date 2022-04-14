@@ -1,14 +1,16 @@
 {
   "name": "@matii96/nx-tsc",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "tsc executor for nx",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Matii96/nx-tsc.git"
   },
   "keywords": [
+    "tsc",
+    "typescript",
     "nx",
-    "tsc"
+    "executor"
   ],
   "author": "Matii96",
   "license": "MIT",
