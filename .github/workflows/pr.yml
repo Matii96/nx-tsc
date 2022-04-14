@@ -1,14 +1,8 @@
 name: Pull request
 
-concurrency:
-  group: pr-${{ github.ref }}
-  cancel-in-progress: true
-
 on:
   pull_request:
     types: [opened, reopened, synchronize]
-    branches:
-      - master
 
 jobs:
   install-dependencies:
