@@ -45,6 +45,8 @@ export const tscRunnerOptionsMock = (): TscRunnerOptions => {
     root: handlerContext.root,
     projectName: handlerContext.projectName,
     tsConfigPath: handlerOptions.tsConfig,
+    excludeFiles: [],
+    includeFiles: [],
     outDir: 'dist',
     paths: {},
     debounceTime: handlerOptions.debounceTime,

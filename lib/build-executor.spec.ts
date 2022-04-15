@@ -10,7 +10,12 @@ describe('BuildExecutor', () => {
   beforeAll(() => {
     jest
       .spyOn(tsconfigLoader, 'tsconfigLoader')
-      .mockReturnValue({ outDir: './dist', paths: { '@mock-workspace/common': ['libs/common/src/index.ts'] } });
+      .mockReturnValue({
+        outDir: './dist',
+        paths: { '@mock-workspace/common': ['libs/common/src/index.ts'] },
+        excludeFiles: [],
+        includeFiles: [],
+      });
     // @ts-ignore
     jest.spyOn(tscBuilder, 'TscBuilder').mockReturnValue({
       run: () =>
