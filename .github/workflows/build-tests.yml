@@ -4,11 +4,11 @@ on: workflow_call
 
 jobs:
   install-dependencies:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Cache node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
@@ -18,11 +18,11 @@ jobs:
         run: if [ ! -d ./node_modules ]; then npm ci; fi
 
   lint:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Load node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
@@ -37,11 +37,11 @@ jobs:
     needs: install-dependencies
 
   unit-tests:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Load node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
@@ -56,18 +56,18 @@ jobs:
     needs: install-dependencies
 
   build:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Load node modules
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-node-modules
         with:
           path: ./node_modules
           key: package-lock-${{ hashFiles('**/package-lock.json') }}
       - name: Cache build output
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-dist
         with:
@@ -82,11 +82,11 @@ jobs:
     needs: install-dependencies
 
   e2e-tests:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Load build output
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-dist
         with:

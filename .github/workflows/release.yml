@@ -14,11 +14,11 @@ jobs:
     uses: ./.github/workflows/build-tests.yml
 
   publish:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - name: Load build output
-        uses: actions/cache@v2
+        uses: actions/cache@v3
         env:
           cache-name: cache-dist
         with:
