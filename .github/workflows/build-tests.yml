@@ -1,0 +1,111 @@
+name: Build and tests
+
+on: workflow_call
+
+jobs:
+  install-dependencies:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Cache node modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ./node_modules
+          key: package-lock-${{ hashFiles('**/package-lock.json') }}
+      - name: Install node_modules
+        run: if [ ! -d ./node_modules ]; then npm ci; fi
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Load node modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ./node_modules
+          key: package-lock-${{ hashFiles('**/package-lock.json') }}
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - name: Run lint
+        run: npm run lint
+    needs: install-dependencies
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Load node modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ./node_modules
+          key: package-lock-${{ hashFiles('**/package-lock.json') }}
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - name: Run unit tests
+        run: npm run test
+    needs: install-dependencies
+
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Load node modules
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: ./node_modules
+          key: package-lock-${{ hashFiles('**/package-lock.json') }}
+      - name: Cache build output
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-dist
+        with:
+          path: ./dist
+          key: lib-${{ hashFiles('./lib/**') }}
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - name: Build
+        run: if [ ! -d ./dist ]; then npm run build; fi
+    needs: install-dependencies
+
+  e2e-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Load build output
+        uses: actions/cache@v3
+        env:
+          cache-name: cache-dist
+        with:
+          path: ./dist
+          key: lib-${{ hashFiles('./lib/**') }}
+      - name: Pull the latest image
+        run: docker-compose -f ./e2e/docker-compose.e2e.yml pull
+      - name: Load docker cache
+        uses: satackey/action-docker-layer-caching@v0.0.11
+        continue-on-error: true
+      - name: Use Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: 16.x
+      - name: Run e2e tests
+        id: e2e
+        run: npm run test:e2e
+        continue-on-error: true
+      - name: Display docker-compose logs & abord
+        if: steps.e2e.outcome != 'success'
+        run: docker-compose -f ./e2e/docker-compose.e2e.yml logs && exit 1
+    needs: build
