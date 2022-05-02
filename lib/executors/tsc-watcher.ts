@@ -30,6 +30,10 @@ export class TscWatcher extends TscExecutor {
     return this.build();
   }
 
+  protected override handleBuildException(err: Error) {
+    console.error('\x1b[31m%s\x1b[0m', err.message);
+  }
+
   private handleChange(event: string, path: string) {
     const files = this.options.excludeFiles.flatMap((pattern) => sync(pattern)).map((filepath) => join(filepath));
     if (files.includes(join(path))) {

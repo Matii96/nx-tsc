@@ -41,8 +41,13 @@ export abstract class TscExecutor {
       if (err instanceof ToolAbortedExeption) {
         return;
       }
-      this.subscriber.error(err);
+
+      this.handleBuildException(err);
     }
+  }
+
+  protected handleBuildException(err: Error) {
+    this.subscriber.error(err);
   }
 
   private ensureNoToolRunning() {
