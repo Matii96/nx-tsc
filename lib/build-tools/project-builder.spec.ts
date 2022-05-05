@@ -8,7 +8,10 @@ describe('ProjectBuilder', () => {
   beforeEach(() => {
     buildTool = new ProjectBuilder();
     buildTool.configure(tscRunnerOptionsMock());
-    jest.spyOn(childProcess, 'exec').mockReturnValue(new childProcess.ChildProcess());
+    const buildProcess = new childProcess.ChildProcess();
+    // @ts-ignore
+    buildProcess.stdout = { on: jest.fn() };
+    jest.spyOn(childProcess, 'exec').mockReturnValue(buildProcess);
   });
 
   describe('execute', () => {
