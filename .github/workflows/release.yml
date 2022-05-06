@@ -5,8 +5,9 @@ concurrency:
   cancel-in-progress: false
 
 on:
-  pull_request:
-    types: [opened, reopened, synchronize]
+  push:
+    tags:
+      - 'v*'
 
 jobs:
   tests:
