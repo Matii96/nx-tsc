@@ -3,7 +3,7 @@ FROM node:16 AS base
 # Prepare nx workspace
 WORKDIR /workspace
 RUN git clone https://github.com/nrwl/nx-examples.git ./
-RUN yarn add --dev @nrwl/nest
+RUN yarn add --dev @nrwl/nest@13.10.2
 RUN npx nx g @nrwl/nest:app server
 RUN npx nx g @nrwl/nest:lib server-lib
 RUN echo '\nimport * as serverLib from "@nx-example/server-lib";\nserverLib;' >> ./apps/server/src/main.ts
