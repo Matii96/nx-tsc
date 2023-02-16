@@ -10,8 +10,8 @@ export class ProjectCleaner extends BuildTool implements IBuildTool {
     }
   }
 
-  override async abord() {
-    await super.abord();
+  override async abort() {
+    await super.abort();
   }
 
   override cleanup() {}

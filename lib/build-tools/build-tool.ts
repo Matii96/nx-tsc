@@ -13,7 +13,7 @@ export class BuildTool implements IBuildTool {
     throw new Error('Method not implemented.');
   }
 
-  async abord(): Promise<void> {
+  async abort(): Promise<void> {
     this.aborted = true;
   }
 
