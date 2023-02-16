@@ -15,7 +15,7 @@ export interface IBuildTool {
   /**
    * Interrupt tool's execution
    */
-  abord(): Promise<void>;
+  abort(): Promise<void>;
 
   isAborted(): boolean;
 

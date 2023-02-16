@@ -21,8 +21,8 @@ export class ProjectBuilder extends BuildTool implements IBuildTool {
     });
   }
 
-  override async abord() {
-    await super.abord();
+  override async abort() {
+    await super.abort();
     try {
       this.buildProcess.kill();
       await new Promise<void>((resolve) => this.buildProcess.on('exit', () => resolve()));

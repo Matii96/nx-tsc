@@ -16,8 +16,8 @@ export class PathsResolver extends BuildTool implements IBuildTool {
     }
   }
 
-  override abord() {
-    return super.abord();
+  override abort() {
+    return super.abort();
   }
 
   override cleanup() {}
@@ -34,6 +34,8 @@ export class PathsResolver extends BuildTool implements IBuildTool {
     const value = this.options.paths[args.pathKey][0].replace(/.ts$/, '.js');
     const absolutePath = join(this.options.outDir, value);
     const relativePath = relative(dirname(args.filePath), absolutePath).replace(/\\/g, '/');
-    return args.file.replace(new RegExp(`"${args.pathKey}"`, 'g'), `"${relativePath}"`);
+    return args.file
+      .replace(new RegExp(`'${args.pathKey}'`, 'g'), `'${relativePath}'`)
+      .replace(new RegExp(`"${args.pathKey}"`, 'g'), `"${relativePath}"`);
   }
 }

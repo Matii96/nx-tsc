@@ -54,7 +54,7 @@ export abstract class TscExecutor {
     if (this.options.isVerbose) {
       console.info('\x1b[33m%s\x1b[0m', `[nx-tsc] Abording ${this.runningTool.constructor.name}...`);
     }
-    return this.runningTool.abord();
+    return this.runningTool.abort();
   }
 
   private async runTool(tool: typeof BuildTool) {

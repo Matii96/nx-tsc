@@ -12,6 +12,7 @@ describe('PathsResolver', () => {
   tscRunnerOptions.outDir = '/app/dist';
   const compiledFile = `
     const tsc_builder_1 = require("@executors/tsc-builder");
+    const tsc_builder_2 = require('@executors/tsc-builder');
     const tsc_watcher_1 = require("@executors/tsc-watcher");
   `;
   const pathToFile = tscRunnerOptions.outDir + '/server/index.js';
@@ -59,6 +60,7 @@ describe('PathsResolver', () => {
       });
 
       expect(result).toContain('../libs/tsc-builder/src/index.js');
+      expect(result).not.toContain("require('@executors/tsc-builder')");
       expect(result).not.toContain('require("@executors/tsc-builder")');
     });
 
